@@ -37,7 +37,7 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     documentForm: 'arrayOfDocuments') ~> source1",
-				"source1 foldDown(unroll(),",
+				"source1 foldDown(unroll(orders),",
 				"     mapColumn(",
 				"          id,",
 				"          name,",
