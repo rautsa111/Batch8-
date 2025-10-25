@@ -28,10 +28,10 @@
 			],
 			"scriptLines": [
 				"source(output(",
-				"          id as integer,",
+				"          address as (city as string, zip as short),",
+				"          id as boolean,",
 				"          name as string,",
-				"          address as (city as string, zip as string),",
-				"          orders as (orderId as integer, amount as integer)[]",
+				"          orders as (amount as short, orderId as short)[]",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
