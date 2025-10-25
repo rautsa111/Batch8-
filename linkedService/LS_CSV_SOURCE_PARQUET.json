@@ -1,0 +1,17 @@
+{
+	"name": "LS_CSV_SOURCE_PARQUET",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"parameters": {
+			"storage_acc": {
+				"type": "string",
+				"defaultValue": "https://adlsdevrawr1611.dfs.core.windows.net/"
+			}
+		},
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "@{linkedService().storage_acc}"
+		}
+	}
+}

@@ -1,0 +1,65 @@
+{
+	"name": "DS_INCREMENTAL_SQL_SINK",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_INCREMENTAL_SQL_SINK",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "@concat('incremental/', \nformatDateTime(utcNow(), 'yyyy'), '/', \nformatDateTime(utcNow(), 'MM'), '/', \nformatDateTime(utcNow(), 'dd'))",
+					"type": "Expression"
+				},
+				"fileSystem": "input"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "INDEX",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "ORDER_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "ORDER_ITEM_ID",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "PRODUCT_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "SELLER_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "SHIPPING_LIMIT_DATE",
+				"type": "TIMESTAMP_MILLIS"
+			},
+			{
+				"name": "PRICE",
+				"type": "DECIMAL",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "FREIGHT_VALUE",
+				"type": "DECIMAL",
+				"precision": 10,
+				"scale": 2
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

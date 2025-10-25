@@ -1,0 +1,27 @@
+{
+	"name": "Tr_sample_sftp",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "PL1_MASTER",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"Trigger": "Tr_sample_sftp"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2025-10-03T20:29:00",
+				"timeZone": "India Standard Time"
+			}
+		}
+	}
+}

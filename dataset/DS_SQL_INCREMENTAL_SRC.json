@@ -1,0 +1,24 @@
+{
+	"name": "DS_SQL_INCREMENTAL_SRC",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL_INCREMENTAL_SRC",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "TableName",
+				"type": "varchar"
+			},
+			{
+				"name": "WatermarkValue",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

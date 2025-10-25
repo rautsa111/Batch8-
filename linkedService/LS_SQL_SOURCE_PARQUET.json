@@ -1,0 +1,21 @@
+{
+	"name": "LS_SQL_SOURCE_PARQUET",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "DESKTOP-OB0QIUQ\\SQLEXPRESS",
+			"database": "Ecomsales",
+			"encrypt": "mandatory",
+			"trustServerCertificate": true,
+			"authenticationType": "SQL",
+			"userName": "test_devrautsa",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI2MThkZmMyZi0yZGEyLTQzZGQtYWY1Yi0wYmZiZGJjMjFmNzMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntime1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

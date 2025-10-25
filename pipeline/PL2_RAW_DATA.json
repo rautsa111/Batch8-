@@ -1,0 +1,217 @@
+{
+	"name": "PL2_RAW_DATA",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup1",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "select distinct L2_switch_type from dbo.vb_tbl_job a join dbo.vb_tbl_trigger b on a.trigger_id = b.trigger_id where b.trigger_name = '@{pipeline().parameters.Trigger}'",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "DS_AZURE_SQL_SRC",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Switch1",
+				"type": "Switch",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"on": {
+						"value": "@activity('Lookup1').output.firstRow.L2_switch_type",
+						"type": "Expression"
+					},
+					"cases": [
+						{
+							"value": "API",
+							"activities": [
+								{
+									"name": "Execute Pipeline1",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "PL_RESTAPI",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": false
+									}
+								}
+							]
+						},
+						{
+							"value": "sql",
+							"activities": [
+								{
+									"name": "Execute Pipeline2",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "PL_SQL_SERVER",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": false
+									}
+								}
+							]
+						},
+						{
+							"value": "CloudStorage",
+							"activities": [
+								{
+									"name": "Execute Pipeline3",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "PL3_GET_CLOUDSTORAGE",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": false,
+										"parameters": {
+											"Trigger": {
+												"value": "@pipeline().parameters.Trigger",
+												"type": "Expression"
+											}
+										}
+									}
+								}
+							]
+						},
+						{
+							"value": "json",
+							"activities": [
+								{
+									"name": "Execute Pipeline6",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "PL_JSON",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": false
+									}
+								}
+							]
+						},
+						{
+							"value": "sftp",
+							"activities": [
+								{
+									"name": "Execute Pipeline5",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "PL_SFTP",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": false
+									}
+								}
+							]
+						},
+						{
+							"value": "bulk",
+							"activities": [
+								{
+									"name": "Execute Pipeline7",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "PL_BULK_UPLOAD",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": false
+									}
+								}
+							]
+						},
+						{
+							"value": "snowflake",
+							"activities": [
+								{
+									"name": "Execute Pipeline8",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "PL_SNOWFLAKE",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": false
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"Trigger": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-09-30T00:31:00Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

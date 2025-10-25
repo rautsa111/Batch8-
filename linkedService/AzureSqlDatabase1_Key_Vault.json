@@ -1,0 +1,24 @@
+{
+	"name": "AzureSqlDatabase1_Key_Vault",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"server": "sql-server-vb-dev1611.database.windows.net",
+			"database": "sql-db-dev1611",
+			"encrypt": "mandatory",
+			"trustServerCertificate": true,
+			"authenticationType": "SQL",
+			"userName": "data-dev-access",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "data-dev-access"
+			}
+		}
+	}
+}

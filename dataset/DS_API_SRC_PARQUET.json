@@ -1,0 +1,13 @@
+{
+	"name": "DS_API_SRC_PARQUET",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_API_SRC_PARQUET",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

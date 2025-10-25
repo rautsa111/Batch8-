@@ -1,0 +1,24 @@
+{
+	"name": "DS_SQL_SINK_PARQUET",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL_SINK_PARQUET",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "@concat('sql/',  formatDateTime(utcNow(), 'yyyy'), '/',  formatDateTime(utcNow(), 'MM'), '/',  formatDateTime(utcNow(), 'dd'))",
+					"type": "Expression"
+				},
+				"fileSystem": "input"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

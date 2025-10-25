@@ -1,0 +1,65 @@
+{
+	"name": "DS_CSV_SINK_PARQUET",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_CSV_SINK_PARQUET",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"adls_storage_acc": {
+				"type": "string"
+			},
+			"directory": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "@concat('csv/', \nformatDateTime(utcNow(), 'yyyy'), '/', \nformatDateTime(utcNow(), 'MM'), '/', \nformatDateTime(utcNow(), 'dd'))\n",
+					"type": "Expression"
+				},
+				"fileSystem": "input"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "order_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "customer_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "order_status",
+				"type": "UTF8"
+			},
+			{
+				"name": "order_purchase_timestamp",
+				"type": "INT96"
+			},
+			{
+				"name": "order_approved_at",
+				"type": "INT96"
+			},
+			{
+				"name": "order_delivered_carrier_date",
+				"type": "INT96"
+			},
+			{
+				"name": "order_delivered_customer_date",
+				"type": "INT96"
+			},
+			{
+				"name": "order_estimated_delivery_date",
+				"type": "INT96"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

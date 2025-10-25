@@ -1,0 +1,17 @@
+{
+	"name": "DS_SQL_SOURCE_PARQUET",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL_SOURCE_PARQUET",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "olist_orders_dataset"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
