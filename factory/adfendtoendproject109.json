@@ -1,0 +1,15 @@
+{
+	"name": "adfendtoendproject109",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "southindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "bf7b316f-ec2b-4881-9845-b1fccec783ad",
+		"tenantId": "39423411-4818-4caa-9027-218cd697b458"
+	}
+}
